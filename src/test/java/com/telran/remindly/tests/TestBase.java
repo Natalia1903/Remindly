@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.net.MalformedURLException;
 
-public class TestsBase {
+public class TestBase {
 
     protected static ApplicationManager app = new ApplicationManager();
 
@@ -17,9 +17,8 @@ public class TestsBase {
     }
 
     @AfterMethod(enabled = false)
-    public void tearDown(){
+    public void tearDown() {
         app.stop();
     }
-
 
 }
