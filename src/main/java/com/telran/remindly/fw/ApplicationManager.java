@@ -6,12 +6,30 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-    AppiumDriver driver;
+        AppiumDriver driver;
 
-    DesiredCapabilities capabilities;
+        DesiredCapabilities capabilities;
+
+       MainScreenHelper mainScreen;
+        RemindersHelper reminders;
+
+
+        public AppiumDriver getDriver() {
+            return driver;
+        }
+
+        public MainScreenHelper getMainScreen() {
+            return mainScreen;
+        }
+
+        public RemindersHelper getReminders() {
+
+            return reminders;
+        }
 
     public void init() throws MalformedURLException {
         capabilities = new DesiredCapabilities();
@@ -23,9 +41,15 @@ public class ApplicationManager {
         capabilities.setCapability("app","/Users/nataliaghibner/Downloads/com.blanyal.remindly_2_apps.evozi.com.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+
+        mainScreen = new MainScreenHelper(driver);
+        reminders = new RemindersHelper(driver);
     }
 
+
     public void stop() {
-        driver.quit();
+            driver.quit();
     }
 }
